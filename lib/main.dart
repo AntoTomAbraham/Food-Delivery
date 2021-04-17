@@ -1,3 +1,4 @@
+import 'package:del_app/Helpers/Footer.dart';
 import 'package:del_app/Helpers/Headers.dart';
 import 'package:del_app/Helpers/MiddleData.dart';
 import 'package:del_app/Service/ManageData.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: Headers()),
         ChangeNotifierProvider.value(value: MiddleHelper()),
         ChangeNotifierProvider.value(value: ManageData()),
+        ChangeNotifierProvider.value(value: Footer()),
       ],
       child: MaterialApp(
         home: SplashScreen(),

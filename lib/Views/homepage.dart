@@ -1,3 +1,4 @@
+import 'package:del_app/Helpers/Footer.dart';
 import 'package:del_app/Helpers/Headers.dart';
 import 'package:del_app/Helpers/middleData.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Footer().floatingActionButton(context),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
@@ -23,6 +25,8 @@ class HomePage extends StatelessWidget {
               MiddleHelper().textFav(),
               MiddleHelper().dataFav(context, 'Favourite'),
               SizedBox(height: 20),
+              MiddleHelper().textbuss(),
+              MiddleHelper().business(context, 'business'),
             ],
           ),
         ),
