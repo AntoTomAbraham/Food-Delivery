@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:del_app/Views/MyCart.dart';
 import 'package:del_app/Views/homepage.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -213,7 +214,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            'cheese',
+                            'Garnish',
                             style: TextStyle(
                               color: Colors.grey.shade500,
                               fontSize: 20.0,
@@ -228,7 +229,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   ),
                                   onPressed: () {}),
                               Text(
-                                "$cheeseValue",
+                                "$garnish",
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.grey.shade500,
@@ -250,7 +251,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            'cheese',
+                            'nuts',
                             style: TextStyle(
                               color: Colors.grey.shade500,
                               fontSize: 20.0,
@@ -265,7 +266,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   ),
                                   onPressed: () {}),
                               Text(
-                                "$cheeseValue",
+                                "$nuts",
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.grey.shade500,
@@ -370,7 +371,12 @@ class _DetailScreenState extends State<DetailScreen> {
         Stack(children: [
           FloatingActionButton(
             backgroundColor: Colors.red.shade500,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => MyCart()));
+            },
             child: Icon(
               EvaIcons.shoppingBagOutline,
               color: Colors.black,
