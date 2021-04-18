@@ -14,10 +14,13 @@ class _DetailScreenState extends State<DetailScreen> {
   int cheeseValue = 0;
   int garnish = 0;
   int nuts = 0;
+  int cartItems = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButton: floatinActionButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -158,7 +161,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.all(0.0),
+                      padding: const EdgeInsets.only(top: 30.0),
                       child: Text(
                         "Add more Stuff",
                         style: TextStyle(
@@ -283,9 +286,106 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: null,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.red.shade100,
+                      border: Border.all(color: Colors.red),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "S",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: null,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.red.shade100,
+                      border: Border.all(color: Colors.red),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "M",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: null,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.red.shade100,
+                      border: Border.all(color: Colors.red),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "L",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            )
           ],
         ),
       ),
+    );
+  }
+
+  Widget floatinActionButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        GestureDetector(
+            child: Container(
+          width: 250,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.red.shade500,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: Center(
+            child: Text(
+              "Add to cart",
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),
+            ),
+          ),
+        )),
+        Stack(children: [
+          FloatingActionButton(
+            backgroundColor: Colors.red.shade500,
+            onPressed: () {},
+            child: Icon(
+              EvaIcons.shoppingBagOutline,
+              color: Colors.black,
+            ),
+          ),
+          Positioned(
+            left: 35,
+            child: CircleAvatar(
+              radius: 10,
+              backgroundColor: Colors.red.shade400,
+              child: Text('$cartItems'),
+            ),
+          )
+        ])
+      ],
     );
   }
 }
