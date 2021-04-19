@@ -11,6 +11,7 @@ class _MyCartState extends State<MyCart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: floatinActionButton(),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.only(left: 12.0),
@@ -79,7 +80,7 @@ class _MyCartState extends State<MyCart> {
 
   Widget cartData() {
     return SizedBox(
-      height: 280.0,
+      height: 265.0,
     );
   }
 
@@ -146,7 +147,7 @@ class _MyCartState extends State<MyCart> {
           borderRadius: BorderRadius.circular(40),
           color: Colors.white,
         ),
-        height: 95.0,
+        height: 100.0,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -194,16 +195,64 @@ class _MyCartState extends State<MyCart> {
                       size: 16.0,
                     ),
                     Text(
-                      "39",
+                      "49",
                       style: TextStyle(color: Colors.grey, fontSize: 16.0),
                     )
                   ],
                 ),
               ],
-            )
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Text(
+                  "Grand Total",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20.0,
+                  ),
+                ),
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.monetization_on,
+                      color: Colors.yellow,
+                      size: 18.0,
+                    ),
+                    Text(
+                      "280",
+                      style: TextStyle(color: Colors.black, fontSize: 20.0),
+                    )
+                  ],
+                ),
+              ],
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget floatinActionButton() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        GestureDetector(
+            child: Container(
+          width: 250,
+          height: 50,
+          decoration: BoxDecoration(
+            color: Colors.red.shade500,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: Center(
+            child: Text(
+              "Place Order",
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),
+            ),
+          ),
+        )),
+      ],
     );
   }
 }
