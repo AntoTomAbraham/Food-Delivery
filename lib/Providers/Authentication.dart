@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Authentication extends ChangeNotifier {
   String uid;
   String get getuid => uid;
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
   Future loginIntoAccount(String email, String password) async {
     UserCredential userCredential = await firebaseAuth
         .signInWithEmailAndPassword(email: email, password: password);

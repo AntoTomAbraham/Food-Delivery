@@ -45,7 +45,7 @@ class _MyCartState extends State<MyCart> {
                         builder: (BuildContext context) => HomePage()));
               }),
           Padding(
-            padding: const EdgeInsets.only(left: 280.0),
+            padding: const EdgeInsets.only(left: 200.0),
             child: IconButton(
               icon: Icon(
                 EvaIcons.trash2Outline,

@@ -1,9 +1,13 @@
 import 'package:del_app/Helpers/Footer.dart';
 import 'package:del_app/Helpers/Headers.dart';
 import 'package:del_app/Helpers/MiddleData.dart';
+import 'package:del_app/Providers/google_sign_in.dart';
+import 'package:del_app/Providers/uidClass.dart';
 import 'package:del_app/Service/ManageData.dart';
 import 'package:del_app/Views/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:del_app/Providers/Authentication.dart';
+import 'package:del_app/Providers/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +23,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(value: getUidClass()),
+        ChangeNotifierProvider.value(value: Authentication()),
         ChangeNotifierProvider.value(value: Headers()),
         ChangeNotifierProvider.value(value: MiddleHelper()),
         ChangeNotifierProvider.value(value: ManageData()),

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:del_app/Views/Login.dart';
+import 'package:del_app/Views/LoginPage.dart';
 import 'package:del_app/Views/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
       () => Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => HomePage(),
+            builder: (BuildContext context) => LoginPage(),
           )),
     );
     super.initState();
