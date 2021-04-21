@@ -3,6 +3,7 @@ import 'package:del_app/Views/homepage.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
   Auth auth = Auth();
@@ -29,7 +30,9 @@ class LoginPage extends StatelessWidget {
                 color: Colors.blue,
               ),
               onPressed: () async {
-                await auth.googleSignIn().whenComplete(
+                await Provider.of<Auth>(context, listen: true)
+                    .googleSignIn()
+                    .whenComplete(
                       () => Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(

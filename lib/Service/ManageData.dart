@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:del_app/Providers/Authentication.dart';
+import 'package:del_app/Providers/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,10 @@ class ManageData extends ChangeNotifier {
     return querySnapshot.docs;
   }
 
-  //Future submitData() async {
-  //return FirebaseFirestore.instance.collection('myOrders').doc(Provider.of<Authentication>(context,listen: false).getuid;)
-  //}
+  Future submitData(BuildContext context, dynamic data) async {
+    return FirebaseFirestore.instance
+        .collection('myOrders')
+        .doc(Provider.of<Auth>(context, listen: false).getuid)
+        .set(data);
+  }
 }

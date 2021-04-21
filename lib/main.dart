@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: getUidClass()),
+        ChangeNotifierProvider.value(value: Auth()),
         ChangeNotifierProvider.value(value: Authentication()),
         ChangeNotifierProvider.value(value: Headers()),
         ChangeNotifierProvider.value(value: MiddleHelper()),

@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
-class Auth {
+class Auth with ChangeNotifier {
+  String uid;
+  String get getuid => uid;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   Future<String> googleSignIn() async {
@@ -23,6 +25,7 @@ class Auth {
     assert(user.email != null);
     final User currentUser = _firebaseAuth.currentUser;
     assert(currentUser.uid == user.uid);
+    uid = user.uid;
     return "Error occured";
   }
 }
