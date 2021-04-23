@@ -29,8 +29,8 @@ class LoginPage extends StatelessWidget {
                 EvaIcons.google,
                 color: Colors.blue,
               ),
-              onPressed: () async {
-                await Provider.of<Auth>(context, listen: true)
+              onPressed: () {
+                Provider.of<Auth>(context, listen: false)
                     .googleSignIn()
                     .whenComplete(
                       () => Navigator.pushReplacement(

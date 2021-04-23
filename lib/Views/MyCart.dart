@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:del_app/Views/homepage.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class MyCart extends StatefulWidget {
@@ -8,6 +10,9 @@ class MyCart extends StatefulWidget {
 }
 
 class _MyCartState extends State<MyCart> {
+  final TextEditingController locationcontroller = TextEditingController();
+  final TextEditingController timeacontroller = TextEditingController();
+  final TextEditingController timebcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +27,7 @@ class _MyCartState extends State<MyCart> {
             appbar(context),
             headerText(),
             cartData(),
-            shippingdetails("Thachampara", context),
+            //shippingdetails("Thachampara", context),
             billingData(),
           ],
         ),
@@ -81,59 +86,165 @@ class _MyCartState extends State<MyCart> {
   Widget cartData() {
     return SizedBox(
       height: 265.0,
+      child: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('myOrders').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container(
+              child: Image.network(
+                "https://tse3.mm.bing.net/th?id=OIP.ixrIL01VXJFnaBin_oqH0QHaFj&pid=Api&P=0&w=229&h=173",
+              ),
+            );
+          } else {
+            return new ListView(
+              children:
+                  snapshot.data.docs.map((DocumentSnapshot documentsnapshot) {
+                return Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.shade500,
+                          blurRadius: 5,
+                          spreadRadius: 3,
+                        )
+                      ]),
+                  height: 200,
+                  width: 400,
+                  child: Row(
+                    children: <Widget>[
+                      SizedBox(
+                        width: 200,
+                        child: Image.network(documentsnapshot.data()['image']),
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            documentsnapshot.data()['name'],
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          Text(
+                            'Price: ${documentsnapshot.data()['price'].toString()}',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18.0,
+                            ),
+                          ),
+                          Text(
+                            'Beacon: ${documentsnapshot.data()['beacon'].toString()}',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          Text(
+                            'Cheese: ${documentsnapshot.data()['cheese'].toString()}',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          Text(
+                            'Onion: ${documentsnapshot.data()['onion'].toString()}',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          CircleAvatar(
+                              child: Text(
+                            documentsnapshot.data()['size'],
+                            style: TextStyle(color: Colors.white),
+                          ))
+                        ],
+                      )
+                    ],
+                  ),
+                );
+              }).toList(),
+            );
+          }
+        },
+      ),
     );
   }
 
-  Widget shippingdetails(String address, BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(color: Colors.grey.shade500, blurRadius: 5, spreadRadius: 5)
-        ],
-        borderRadius: BorderRadius.circular(40),
-        color: Colors.white,
-      ),
-      height: 105,
-      width: 400,
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: <Widget>[
-                    Icon(Icons.location_on),
-                    Container(
-                        constraints: BoxConstraints(maxWidth: 250.0),
-                        child: Text("New Police area"))
-                  ],
-                ),
-                IconButton(icon: Icon(Icons.edit), onPressed: () {})
-              ],
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Icon(EvaIcons.clock),
-                  Container(
-                      constraints: BoxConstraints(maxWidth: 250.0),
-                      child: Text(" 8am : 11am"))
-                ],
-              ),
-              IconButton(icon: Icon(Icons.edit), onPressed: () {})
-            ],
-          )
-        ],
-      ),
-    );
-  }
+  // Widget shippingdetails(String address, BuildContext context) {
+  //   return GestureDetector(
+  //     onTap: () {
+  //       detailSheet(context);
+  //     },
+  //     child: Container(
+  //       decoration: BoxDecoration(
+  //         boxShadow: [
+  //           BoxShadow(
+  //               color: Colors.grey.shade500, blurRadius: 5, spreadRadius: 5)
+  //         ],
+  //         borderRadius: BorderRadius.circular(40),
+  //         color: Colors.white,
+  //       ),
+  //       height: 105,
+  //       width: 400,
+  //       child: Column(
+  //         children: <Widget>[
+  //           Padding(
+  //             padding: const EdgeInsets.only(top: 8.0),
+  //             child: Row(
+  //               mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //               children: <Widget>[
+  //                 Row(
+  //                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //                   children: <Widget>[
+  //                     Icon(Icons.location_on),
+  //                     Container(
+  //                       constraints: BoxConstraints(maxWidth: 250.0),
+  //                       child: TextField(
+  //                         controller: locationcontroller,
+  //                       ),
+  //                     )
+  //                   ],
+  //                 ),
+  //                 IconButton(icon: Icon(Icons.edit), onPressed: () {})
+  //               ],
+  //             ),
+  //           ),
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //             children: <Widget>[
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //                 children: <Widget>[
+  //                   Icon(EvaIcons.clock),
+  //                   Container(
+  //                       constraints: BoxConstraints(maxWidth: 250.0),
+  //                       child: Row(
+  //                         mainAxisAlignment: MainAxisAlignment.center,
+  //                         children: <Widget>[
+  //                           // TextField(
+  //                           //   controller: timeacontroller,
+  //                           // ),
+  //                           // Text(":"),
+  //                           // TextField(
+  //                           //   controller: timebcontroller,
+  //                           // ),
+  //                         ],
+  //                       ))
+  //                 ],
+  //               ),
+  //               IconButton(icon: Icon(Icons.edit), onPressed: () {})
+  //             ],
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   Widget billingData() {
     return Padding(
@@ -254,5 +365,65 @@ class _MyCartState extends State<MyCart> {
         )),
       ],
     );
+  }
+
+  detailSheet(BuildContext context) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return new Container(
+            height: 400,
+            width: 400,
+            decoration: BoxDecoration(
+              color: Colors.white,
+            ),
+            child: Center(
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Enter Location",
+                        hintStyle: TextStyle(color: Colors.orange),
+                      ),
+                      controller: locationcontroller,
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "you'r available from",
+                        hintStyle: TextStyle(color: Colors.orange),
+                      ),
+                      controller: timeacontroller,
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "to",
+                        hintStyle: TextStyle(color: Colors.orange),
+                      ),
+                      controller: timebcontroller,
+                      style: TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  MaterialButton(
+                      color: Colors.orange,
+                      child: Text(
+                        "Login",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: () {})
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

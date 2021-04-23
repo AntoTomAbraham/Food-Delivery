@@ -61,15 +61,13 @@ class MiddleHelper extends ChangeNotifier {
               //itembuilder needs a build context and a index for compulsory
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => DetailScreen(
-                            queryDocumentSnapshot: snapshot.data[index],
-                          ),
-                        ));
-                  },
+                  onTap: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => DetailScreen(
+                          queryDocumentSnapshot: snapshot.data[index],
+                        ),
+                      )),
                   child: Padding(
                     padding: const EdgeInsets.only(
                       top: 4.0,

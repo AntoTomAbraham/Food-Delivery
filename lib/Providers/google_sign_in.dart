@@ -25,7 +25,10 @@ class Auth with ChangeNotifier {
     assert(user.email != null);
     final User currentUser = _firebaseAuth.currentUser;
     assert(currentUser.uid == user.uid);
-    uid = user.uid;
+    uid = user.uid != null ? user.uid : "sdklfjkajflasjkl";
+    print("--------------------UID _____________IS++++ this Stufffffffffff_" +
+        uid);
+    notifyListeners();
     return "Error occured";
   }
 }

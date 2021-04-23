@@ -3,6 +3,8 @@ import 'package:del_app/Views/MyCart.dart';
 import 'package:del_app/Views/homepage.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:del_app/Providers/Calculation.dart';
 
 class DetailScreen extends StatefulWidget {
   final QueryDocumentSnapshot queryDocumentSnapshot;
@@ -57,7 +59,10 @@ class _DetailScreenState extends State<DetailScreen> {
                 EvaIcons.trash2Outline,
                 color: Colors.red,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Provider.of<Calculation>(context, listen: false)
+                    .removeAllData();
+              },
             ),
           )
         ],
@@ -190,9 +195,15 @@ class _DetailScreenState extends State<DetailScreen> {
                                     EvaIcons.minusCircle,
                                     color: Colors.cyan,
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () {
+                                    Provider.of<Calculation>(context,
+                                            listen: false)
+                                        .minusCheese();
+                                  }),
                               Text(
-                                "$cheeseValue",
+                                Provider.of<Calculation>(context, listen: true)
+                                    .getcheeseValue
+                                    .toString(),
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.grey.shade500,
@@ -203,7 +214,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                     EvaIcons.plusCircle,
                                     color: Colors.cyan,
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () {
+                                    Provider.of<Calculation>(context,
+                                            listen: false)
+                                        .addCheese();
+                                  }),
                             ],
                           )
                         ],
@@ -214,7 +229,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            'Garnish',
+                            'Onion',
                             style: TextStyle(
                               color: Colors.grey.shade500,
                               fontSize: 20.0,
@@ -227,9 +242,15 @@ class _DetailScreenState extends State<DetailScreen> {
                                     EvaIcons.minusCircle,
                                     color: Colors.cyan,
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () {
+                                    Provider.of<Calculation>(context,
+                                            listen: false)
+                                        .minusOnion();
+                                  }),
                               Text(
-                                "$garnish",
+                                Provider.of<Calculation>(context, listen: true)
+                                    .getOnionValue
+                                    .toString(),
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.grey.shade500,
@@ -240,7 +261,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                     EvaIcons.plusCircle,
                                     color: Colors.cyan,
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () {
+                                    Provider.of<Calculation>(context,
+                                            listen: false)
+                                        .addonion();
+                                  }),
                             ],
                           )
                         ],
@@ -251,7 +276,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            'nuts',
+                            'beacon',
                             style: TextStyle(
                               color: Colors.grey.shade500,
                               fontSize: 20.0,
@@ -264,9 +289,15 @@ class _DetailScreenState extends State<DetailScreen> {
                                     EvaIcons.minusCircle,
                                     color: Colors.cyan,
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () {
+                                    Provider.of<Calculation>(context,
+                                            listen: false)
+                                        .minusbeacon();
+                                  }),
                               Text(
-                                "$nuts",
+                                Provider.of<Calculation>(context, listen: false)
+                                    .getbeaconValue
+                                    .toString(),
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.grey.shade500,
@@ -277,7 +308,11 @@ class _DetailScreenState extends State<DetailScreen> {
                                     EvaIcons.plusCircle,
                                     color: Colors.cyan,
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () {
+                                    Provider.of<Calculation>(context,
+                                            listen: false)
+                                        .addbeacon();
+                                  }),
                             ],
                           )
                         ],
@@ -291,10 +326,16 @@ class _DetailScreenState extends State<DetailScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 GestureDetector(
-                  onTap: null,
+                  onTap: () {
+                    Provider.of<Calculation>(context, listen: false)
+                        .selectSmallSize();
+                  },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.red.shade100,
+                      color: Provider.of<Calculation>(context, listen: true)
+                              .smallTapped
+                          ? Colors.red.shade100
+                          : Colors.white,
                       border: Border.all(color: Colors.red),
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -308,10 +349,16 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: null,
+                  onTap: () {
+                    Provider.of<Calculation>(context, listen: false)
+                        .selectMediumSize();
+                  },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.red.shade100,
+                      color: Provider.of<Calculation>(context, listen: true)
+                              .mediumTapped
+                          ? Colors.red.shade100
+                          : Colors.white,
                       border: Border.all(color: Colors.red),
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -325,10 +372,16 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: null,
+                  onTap: () {
+                    Provider.of<Calculation>(context, listen: false)
+                        .selectLargeSize();
+                  },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.red.shade100,
+                      color: Provider.of<Calculation>(context, listen: true)
+                              .largeTapped
+                          ? Colors.red.shade100
+                          : Colors.white,
                       border: Border.all(color: Colors.red),
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -354,20 +407,36 @@ class _DetailScreenState extends State<DetailScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         GestureDetector(
+            onTap: () {
+              Provider.of<Calculation>(context, listen: false)
+                  .addToCart(context, {
+                'image': widget.queryDocumentSnapshot['image'],
+                'name': widget.queryDocumentSnapshot['name'],
+                'price': widget.queryDocumentSnapshot['price'],
+                'onion': Provider.of<Calculation>(context, listen: false)
+                    .getOnionValue,
+                'beacon': Provider.of<Calculation>(context, listen: false)
+                    .getbeaconValue,
+                'cheese': Provider.of<Calculation>(context, listen: false)
+                    .getcheeseValue,
+                'size':
+                    Provider.of<Calculation>(context, listen: false).getsize,
+              });
+            },
             child: Container(
-          width: 250,
-          height: 50,
-          decoration: BoxDecoration(
-            color: Colors.red.shade500,
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: Center(
-            child: Text(
-              "Add to cart",
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),
-            ),
-          ),
-        )),
+              width: 250,
+              height: 50,
+              decoration: BoxDecoration(
+                color: Colors.red.shade500,
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: Center(
+                child: Text(
+                  "Add to cart",
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),
+                ),
+              ),
+            )),
         Stack(children: [
           FloatingActionButton(
             backgroundColor: Colors.red.shade500,

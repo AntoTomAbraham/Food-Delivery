@@ -1,6 +1,7 @@
 import 'package:del_app/Helpers/Footer.dart';
 import 'package:del_app/Helpers/Headers.dart';
 import 'package:del_app/Helpers/MiddleData.dart';
+import 'package:del_app/Providers/Calculation.dart';
 import 'package:del_app/Providers/google_sign_in.dart';
 import 'package:del_app/Providers/uidClass.dart';
 import 'package:del_app/Service/ManageData.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: Auth()),
+        ChangeNotifierProvider.value(value: Calculation()),
         ChangeNotifierProvider.value(value: Authentication()),
         ChangeNotifierProvider.value(value: Headers()),
         ChangeNotifierProvider.value(value: MiddleHelper()),
