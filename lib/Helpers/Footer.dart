@@ -1,3 +1,4 @@
+import 'package:del_app/Views/Cart.dart';
 import 'package:del_app/Views/MyCart.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +9,7 @@ class Footer extends ChangeNotifier {
     return FloatingActionButton(
       onPressed: () {
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (BuildContext context) => MyCart()));
+            MaterialPageRoute(builder: (BuildContext context) => Cart()));
       },
       child: Icon(EvaIcons.shoppingBag),
     );
