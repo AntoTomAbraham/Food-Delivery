@@ -26,8 +26,9 @@ class _MyCartState extends State<MyCart> {
           children: <Widget>[
             appbar(context),
             headerText(),
+            //SizedBox(height: 20),
             cartData(),
-            //shippingdetails("Thachampara", context),
+            shippingdetails("Thachampara", context),
             billingData(),
           ],
         ),
@@ -37,7 +38,7 @@ class _MyCartState extends State<MyCart> {
 
   Widget appbar(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 30.0),
+      padding: const EdgeInsets.only(top: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -85,7 +86,7 @@ class _MyCartState extends State<MyCart> {
 
   Widget cartData() {
     return SizedBox(
-      height: 265.0,
+      height: 260.0,
       child: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('myOrders').snapshots(),
         builder: (context, snapshot) {
@@ -96,78 +97,82 @@ class _MyCartState extends State<MyCart> {
               ),
             );
           } else {
-            return new ListView(
-              children:
-                  snapshot.data.docs.map((DocumentSnapshot documentsnapshot) {
-                return Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.shade500,
-                          blurRadius: 5,
-                          spreadRadius: 3,
+            return Container(
+              height: 220,
+              child: new ListView(
+                children:
+                    snapshot.data.docs.map((DocumentSnapshot documentsnapshot) {
+                  return Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade500,
+                            blurRadius: 5,
+                            spreadRadius: 3,
+                          )
+                        ]),
+                    height: 200,
+                    width: 400,
+                    child: Row(
+                      children: <Widget>[
+                        SizedBox(
+                          width: 200,
+                          child:
+                              Image.network(documentsnapshot.data()['image']),
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              documentsnapshot.data()['name'],
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                            Text(
+                              'Price: ${documentsnapshot.data()['price'].toString()}',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18.0,
+                              ),
+                            ),
+                            Text(
+                              'Beacon: ${documentsnapshot.data()['beacon'].toString()}',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                            Text(
+                              'Cheese: ${documentsnapshot.data()['cheese'].toString()}',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                            Text(
+                              'Onion: ${documentsnapshot.data()['onion'].toString()}',
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                            CircleAvatar(
+                                child: Text(
+                              documentsnapshot.data()['size'],
+                              style: TextStyle(color: Colors.white),
+                            ))
+                          ],
                         )
-                      ]),
-                  height: 200,
-                  width: 400,
-                  child: Row(
-                    children: <Widget>[
-                      SizedBox(
-                        width: 200,
-                        child: Image.network(documentsnapshot.data()['image']),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            documentsnapshot.data()['name'],
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Text(
-                            'Price: ${documentsnapshot.data()['price'].toString()}',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18.0,
-                            ),
-                          ),
-                          Text(
-                            'Beacon: ${documentsnapshot.data()['beacon'].toString()}',
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Text(
-                            'Cheese: ${documentsnapshot.data()['cheese'].toString()}',
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Text(
-                            'Onion: ${documentsnapshot.data()['onion'].toString()}',
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          CircleAvatar(
-                              child: Text(
-                            documentsnapshot.data()['size'],
-                            style: TextStyle(color: Colors.white),
-                          ))
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              }).toList(),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ),
             );
           }
         },
@@ -175,76 +180,77 @@ class _MyCartState extends State<MyCart> {
     );
   }
 
-  // Widget shippingdetails(String address, BuildContext context) {
-  //   return GestureDetector(
-  //     onTap: () {
-  //       detailSheet(context);
-  //     },
-  //     child: Container(
-  //       decoration: BoxDecoration(
-  //         boxShadow: [
-  //           BoxShadow(
-  //               color: Colors.grey.shade500, blurRadius: 5, spreadRadius: 5)
-  //         ],
-  //         borderRadius: BorderRadius.circular(40),
-  //         color: Colors.white,
-  //       ),
-  //       height: 105,
-  //       width: 400,
-  //       child: Column(
-  //         children: <Widget>[
-  //           Padding(
-  //             padding: const EdgeInsets.only(top: 8.0),
-  //             child: Row(
-  //               mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //               children: <Widget>[
-  //                 Row(
-  //                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //                   children: <Widget>[
-  //                     Icon(Icons.location_on),
-  //                     Container(
-  //                       constraints: BoxConstraints(maxWidth: 250.0),
-  //                       child: TextField(
-  //                         controller: locationcontroller,
-  //                       ),
-  //                     )
-  //                   ],
-  //                 ),
-  //                 IconButton(icon: Icon(Icons.edit), onPressed: () {})
-  //               ],
-  //             ),
-  //           ),
-  //           Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //             children: <Widget>[
-  //               Row(
-  //                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //                 children: <Widget>[
-  //                   Icon(EvaIcons.clock),
-  //                   Container(
-  //                       constraints: BoxConstraints(maxWidth: 250.0),
-  //                       child: Row(
-  //                         mainAxisAlignment: MainAxisAlignment.center,
-  //                         children: <Widget>[
-  //                           // TextField(
-  //                           //   controller: timeacontroller,
-  //                           // ),
-  //                           // Text(":"),
-  //                           // TextField(
-  //                           //   controller: timebcontroller,
-  //                           // ),
-  //                         ],
-  //                       ))
-  //                 ],
-  //               ),
-  //               IconButton(icon: Icon(Icons.edit), onPressed: () {})
-  //             ],
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
+  Widget shippingdetails(String address, BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        detailSheet(context);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.shade500, blurRadius: 5, spreadRadius: 5)
+          ],
+          borderRadius: BorderRadius.circular(40),
+          color: Colors.white,
+        ),
+        height: 105,
+        width: 400,
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Icon(Icons.location_on),
+                      Container(
+                        constraints: BoxConstraints(maxWidth: 250.0),
+                        child: TextField(
+                          controller: locationcontroller,
+                        ),
+                      )
+                    ],
+                  ),
+                  IconButton(icon: Icon(Icons.edit), onPressed: () {})
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Icon(EvaIcons.clock),
+                    Container(
+                        height: 50.0,
+                        constraints: BoxConstraints(maxWidth: 250.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            TextField(
+                              controller: timeacontroller,
+                            ),
+                            Text(":"),
+                            TextField(
+                              controller: timebcontroller,
+                            ),
+                          ],
+                        ))
+                  ],
+                ),
+                IconButton(icon: Icon(Icons.edit), onPressed: () {})
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget billingData() {
     return Padding(
