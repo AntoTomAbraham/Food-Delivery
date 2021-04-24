@@ -9,6 +9,9 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
+  TextEditingController locationController = TextEditingController();
+  TextEditingController timeBController = TextEditingController();
+  TextEditingController timeAController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,6 +20,7 @@ class _CartState extends State<Cart> {
           appbar(context),
           headerText(),
           cartData(),
+          billingData(),
           btn(),
         ],
       ),
@@ -107,78 +111,82 @@ class _CartState extends State<Cart> {
               );
             } else {
               return Container(
-                height: 220,
+                height: 180,
                 child: new ListView(
                   scrollDirection: Axis.horizontal,
                   children: snapshot.data.docs
                       .map((DocumentSnapshot documentsnapshot) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.shade500,
-                              blurRadius: 5,
-                              spreadRadius: 3,
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.shade500,
+                                blurRadius: 5,
+                                spreadRadius: 3,
+                              )
+                            ]),
+                        height: 200,
+                        width: 400,
+                        child: Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 200,
+                              child: Image.network(
+                                  documentsnapshot.data()['image']),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                SizedBox(height: 20),
+                                Text(
+                                  documentsnapshot.data()['name'],
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                Text(
+                                  'Price: ${documentsnapshot.data()['price'].toString()}',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                                Text(
+                                  'Beacon: ${documentsnapshot.data()['beacon'].toString()}',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                Text(
+                                  'Cheese: ${documentsnapshot.data()['cheese'].toString()}',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                Text(
+                                  'Onion: ${documentsnapshot.data()['onion'].toString()}',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                                CircleAvatar(
+                                    child: Text(
+                                  documentsnapshot.data()['size'],
+                                  style: TextStyle(color: Colors.white),
+                                ))
+                              ],
                             )
-                          ]),
-                      height: 200,
-                      width: 400,
-                      child: Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 200,
-                            child:
-                                Image.network(documentsnapshot.data()['image']),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                documentsnapshot.data()['name'],
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              Text(
-                                'Price: ${documentsnapshot.data()['price'].toString()}',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                              Text(
-                                'Beacon: ${documentsnapshot.data()['beacon'].toString()}',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              Text(
-                                'Cheese: ${documentsnapshot.data()['cheese'].toString()}',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              Text(
-                                'Onion: ${documentsnapshot.data()['onion'].toString()}',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              CircleAvatar(
-                                  child: Text(
-                                documentsnapshot.data()['size'],
-                                style: TextStyle(color: Colors.white),
-                              ))
-                            ],
-                          )
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   }).toList(),
@@ -186,6 +194,67 @@ class _CartState extends State<Cart> {
               );
             }
           },
+        ),
+      ),
+    );
+  }
+
+  Widget billingData() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 200,
+        width: 400,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(25),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade500,
+                blurRadius: 5,
+                spreadRadius: 3,
+              )
+            ]),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              child: TextField(
+                  controller: locationController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Enter your location',
+                  )),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Container(child: Text("Delivery from:")),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                SizedBox(
+                  width: 100,
+                  child: TextField(
+                      controller: timeAController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'From',
+                      )),
+                ),
+                SizedBox(
+                  width: 100,
+                  child: TextField(
+                      controller: timeBController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'To',
+                      )),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );

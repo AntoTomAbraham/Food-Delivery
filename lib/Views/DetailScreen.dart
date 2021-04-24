@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:del_app/Views/Cart.dart';
 import 'package:del_app/Views/MyCart.dart';
 import 'package:del_app/Views/homepage.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -441,10 +442,8 @@ class _DetailScreenState extends State<DetailScreen> {
           FloatingActionButton(
             backgroundColor: Colors.red.shade500,
             onPressed: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => MyCart()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (BuildContext context) => Cart()));
             },
             child: Icon(
               EvaIcons.shoppingBagOutline,
@@ -456,7 +455,11 @@ class _DetailScreenState extends State<DetailScreen> {
             child: CircleAvatar(
               radius: 10,
               backgroundColor: Colors.red.shade400,
-              child: Text('$cartItems'),
+              child: Text(
+                Provider.of<Calculation>(context, listen: true)
+                    .getCartData
+                    .toString(),
+              ),
             ),
           )
         ])
