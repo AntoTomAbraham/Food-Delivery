@@ -1,5 +1,4 @@
 import 'package:del_app/Views/Cart.dart';
-import 'package:del_app/Views/MyCart.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

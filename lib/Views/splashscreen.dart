@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:del_app/Views/Decider.dart';
 import 'package:del_app/Views/Login.dart';
 import 'package:del_app/Views/LoginPage.dart';
 import 'package:del_app/Views/homepage.dart';
@@ -21,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
       () => Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (BuildContext context) => LoginPage(),
+            builder: (BuildContext context) => Decider(),
           )),
     );
     super.initState();

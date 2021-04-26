@@ -19,4 +19,11 @@ class ManageData extends ChangeNotifier {
         .doc(Provider.of<Auth>(context, listen: false).getuid)
         .set(data);
   }
+
+  Future deleteData(BuildContext context) async {
+    return FirebaseFirestore.instance
+        .collection('myOrders')
+        .doc(Provider.of<Auth>(context, listen: false).getuid)
+        .delete();
+  }
 }

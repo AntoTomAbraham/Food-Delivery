@@ -33,6 +33,7 @@ dependencies:
   geolocator: ^6.0.0+4
   google_maps_flutter: ^0.5.28+1
   google_sign_in: ^4.5.6
+  razorpay_flutter: ^1.1.4
   
 
 

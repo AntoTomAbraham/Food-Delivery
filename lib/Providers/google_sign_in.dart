@@ -5,8 +5,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class Auth with ChangeNotifier {
-  String uid;
+  String uid, email;
   String get getuid => uid;
+  String get getemail => email;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   Future<String> googleSignIn() async {
@@ -25,6 +26,7 @@ class Auth with ChangeNotifier {
     assert(user.email != null);
     final User currentUser = _firebaseAuth.currentUser;
     assert(currentUser.uid == user.uid);
+    email = user.email;
     uid = user.uid != null ? user.uid : "sdklfjkajflasjkl";
     print("--------------------UID _____________IS++++ this Stufffffffffff_" +
         uid);
