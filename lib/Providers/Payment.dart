@@ -38,8 +38,8 @@ class PaymentHelper with ChangeNotifier {
   }
 
   handleExternalWallet(
-      BuildContext context, ExternalWalletResponse ExternalWalletResponse) {
-    return showResponse(context, ExternalWalletResponse.walletName);
+      BuildContext context, ExternalWalletResponse externalWalletResponse) {
+    return showResponse(context, externalWalletResponse.walletName);
   }
 
   showResponse(BuildContext context, String response) {

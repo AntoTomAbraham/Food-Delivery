@@ -6,6 +6,7 @@ import 'package:del_app/Providers/Payment.dart';
 import 'package:del_app/Providers/google_sign_in.dart';
 import 'package:del_app/Providers/uidClass.dart';
 import 'package:del_app/Service/ManageData.dart';
+import 'package:del_app/Views/Admin/Services/AdminDetailsHelper.dart';
 import 'package:del_app/Views/splashscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:del_app/Providers/Authentication.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(value: AdminDetailsHelper()),
         ChangeNotifierProvider.value(value: PaymentHelper()),
         ChangeNotifierProvider.value(value: Auth()),
         ChangeNotifierProvider.value(value: Calculation()),
