@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:del_app/Providers/Payment.dart';
 import 'package:del_app/Providers/google_sign_in.dart';
+import 'package:del_app/Views/StripePayment.dart';
 import 'package:del_app/Views/homepage.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,7 @@ class _CartState extends State<Cart> {
           amountData(),
           billingData(),
           btn(),
+          //btnPayment(),
         ],
       ),
     );
@@ -141,9 +143,33 @@ class _CartState extends State<Cart> {
                     .showCheckOutButtonmethod);
           },
           child: Text(
-            "Order now",
+            "Pay using Razorpay",
           ),
           color: Colors.red[300],
+        ),
+      ),
+    );
+  }
+
+  Widget btnPayment() {
+    return Padding(
+      padding: const EdgeInsets.all(28.0),
+      child: Container(
+        width: 0,
+        child: FlatButton(
+          textColor: Colors.white,
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => PaytmPayment(),
+              ),
+            );
+          },
+          child: Text(
+            "Pay using Stripe",
+          ),
+          color: Colors.blue,
         ),
       ),
     );
