@@ -29,8 +29,6 @@ dependencies:
   provider: ^4.3.2+1
   eva_icons_flutter: ^2.0.1
   cloud_firestore: ^0.14.0+2
-  geocoder: ^0.2.1
-  geolocator: ^6.0.0+4
   google_maps_flutter: ^0.5.28+1
   google_sign_in: ^4.5.6
   razorpay_flutter: ^1.1.4
